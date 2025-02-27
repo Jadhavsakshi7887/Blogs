@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformers: Revolutionizing Deep Learning</title>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #6c757d;
+            --accent-color: #ff7e67;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --text-color: #333;
+            --light-text: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.9) 0%, rgba(31, 64, 104, 0.9) 100%);
+            z-index: 1;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
+            opacity: 0.3;
+        }
+        
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--primary-color);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .author-info {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+        }
+        
+        .diagram-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .diagram-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        svg {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        code {
+            background-color: #f1f1f1;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            color: var(--secondary-color);
+        }
+        
+        .conclusion {
+            background-color: rgba(74, 111, 165, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .cta-container {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #ff6347;
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-icon {
+            margin: 0 0.5rem;
+            color: var(--light-text);
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-pattern"></div>
+        <div class="header-content">
+            <h1>Transformers: Revolutionizing Deep Learning</h1>
+            <p class="author-info">By Sakshi Jadhav | February 27, 2025 </p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#attention">Self-Attention</a></li>
+            <li><a href="#comparison">VS RNNs</a></li>
+            <li><a href="#models">Key Models</a></li>
+            <li><a href="#applications">Applications</a></li>
+            <li><a href="#future">Future</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <p>The transformer architecture has fundamentally changed how we approach natural language processing and beyond. In this blog, I'll dive deep into what makes transformers work, their architectural components, and their wide-ranging applications across AI.</p>
+        
+        <h2 id="architecture">Understanding Transformer Architecture</h2>
+        
+        <p>At their core, transformers are built on a simple yet powerful idea: attention. Unlike previous sequence models that processed data sequentially, transformers can look at an entire sequence simultaneously.</p>
+        
+        <div class="diagram-container">
+            <div class="diagram-title">Figure 1: Transformer Architecture</div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+              <!-- Background -->
+              <rect width="800" height="600" fill="#f8f9fa" rx="10" ry="10"/>
+              
+              <!-- Title -->
+              <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">Transformer Architecture</text>
+              
+              <!-- Input and Output -->
+              <rect x="250" y="70" width="300" height="40" rx="5" ry="5" fill="#e9ecef" stroke="#ced4da" stroke-width="2"/>
+              <text x="400" y="95" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Input Embedding + Position Encoding</text>
+              
+              <rect x="250" y="500" width="300" height="40" rx="5" ry="5" fill="#e9ecef" stroke="#ced4da" stroke-width="2"/>
+              <text x="400" y="525" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Output Embedding + Position Encoding</text>
+              
+              <!-- Encoder Stack -->
+              <rect x="150" y="130" width="200" height="320" rx="10" ry="10" fill="#c5e8f7" stroke="#86c5da" stroke-width="2"/>
+              <text x="250" y="155" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Encoder Stack</text>
+              
+              <!-- Encoder Modules -->
+              <rect x="175" y="170" width="150" height="80" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="250" y="200" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Multi-Head</text>
+              <text x="250" y="220" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Self-Attention</text>
+              
+              <rect x="175" y="260" width="150" height="60" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="250" y="290" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Add & Normalize</text>
+              
+              <rect x="175" y="330" width="150" height="60" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="250" y="360" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Feed Forward</text>
+              
+              <rect x="175" y="400" width="150" height="60" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="250" y="430" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Add & Normalize</text>
+              
+              <!-- Decoder Stack -->
+              <rect x="450" y="130" width="200" height="320" rx="10" ry="10" fill="#fad6c5" stroke="#daa386" stroke-width="2"/>
+              <text x="550" y="155" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold" fill="#333">Decoder Stack</text>
+              
+              <!-- Decoder Modules -->
+              <rect x="475" y="170" width="150" height="60" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="550" y="200" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Masked Multi-Head</text>
+              <text x="550" y="220" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Self-Attention</text>
+              
+              <rect x="475" y="240" width="150" height="60" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="550" y="270" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Add & Normalize</text>
+              
+              <rect x="475" y="310" width="150" height="60" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="550" y="340" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Cross-Attention</text>
+              
+              <rect x="475" y="380" width="150" height="60" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="550" y="410" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Feed Forward</text>
+              
+              <rect x="475" y="450" width="150" height="40" rx="5" ry="5" fill="#ffffff" stroke="#ced4da" stroke-width="2"/>
+              <text x="550" y="475" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Add & Normalize</text>
+              
+              <!-- Connection Lines -->
+              <line x1="400" y1="110" x2="400" y2="130" stroke="#333" stroke-width="2"/>
+              <line x1="250" y1="450" x2="250" y2="500" stroke="#333" stroke-width="2"/>
+              <line x1="550" y1="490" x2="550" y2="500" stroke="#333" stroke-width="2"/>
+              
+              <!-- Cross Connections -->
+              <path d="M 350 290 C 400 290, 400 340, 450 340" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+              <text x="400" y="325" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Encoder-Decoder</text>
+              <text x="400" y="340" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">Attention</text>
+              
+              <!-- Linear and Softmax -->
+              <rect x="350" y="550" width="100" height="40" rx="5" ry="5" fill="#d8f3dc" stroke="#95d5b2" stroke-width="2"/>
+              <text x="400" y="575" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Linear & Softmax</text>
+              
+              <line x1="400" y1="540" x2="400" y2="550" stroke="#333" stroke-width="2"/>
+            </svg>
+        </div>
+        
+        <h3>The Core Components</h3>
+        
+        <ul>
+            <li><strong>Input Embedding</strong>: Transforms words/tokens into vectors</li>
+            <li><strong>Positional Encoding</strong>: Adds position information to the vectors</li>
+            <li><strong>Multi-Head Attention</strong>: The heart of the transformer</li>
+            <li><strong>Feed-Forward Networks</strong>: Process the attention outputs</li>
+            <li><strong>Layer Normalization</strong>: Stabilizes learning</li>
+            <li><strong>Residual Connections</strong>: Help with gradient flow</li>
+        </ul>
+        
+        <h2 id="attention">How Self-Attention Works</h2>
+        
+        <p>Self-attention is what allows transformers to consider relationships between all tokens in a sequence simultaneously. Unlike RNNs or LSTMs, which process data sequentially, attention lets the model "look" at all positions at once.</p>
+        
+        <div class="diagram-container">
+            <div class="diagram-title">Figure 2: Self-Attention Mechanism</div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+              <!-- Background -->
+              <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+              
+              <!-- Title -->
+              <text x="400" y="40" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold" fill="#333">Self-Attention Mechanism</text>
+              
+              <!-- Input Tokens -->
+              <rect x="50" y="100" width="700" height="60" rx="5" ry="5" fill="#e9ecef" stroke="#ced4da" stroke-width="2"/>
+              <text x="400" y="135" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Input Token Embeddings</text>
+              
+              <!-- Query, Key, Value Projections -->
+              <rect x="100" y="200" width="150" height="50" rx="5" ry="5" fill="#c5e8f7" stroke="#86c5da" stroke-width="2"/>
+              <text x="175" y="230" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Query (Q)</text>
+              
+              <rect x="325" y="200" width="150" height="50" rx="5" ry="5" fill="#fad6c5" stroke="#daa386" stroke-width="2"/>
+              <text x="400" y="230" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Key (K)</text>
+              
+              <rect x="550" y="200" width="150" height="50" rx="5" ry="5" fill="#d8f3dc" stroke="#95d5b2" stroke-width="2"/>
+              <text x="625" y="230" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Value (V)</text>
+              
+              <!-- Attention Matrix -->
+              <rect x="250" y="290" width="300" height="70" rx="5" ry="5" fill="#e0cffc" stroke="#b79ced" stroke-width="2"/>
+              <text x="400" y="325" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Scaled Dot-Product Attention</text>
+              <text x="400" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#555">softmax(QK^T / √d_k)V</text>
+              
+              <!-- Output -->
+              <rect x="250" y="400" width="300" height="60" rx="5" ry="5" fill="#ffeedb" stroke="#ffcb91" stroke-width="2"/>
+              <text x="400" y="435" font-family="Arial" font-size="16" text-anchor="middle" fill="#333">Attention Output</text>
+              
+              <!-- Arrows -->
+              <line x1="175" y1="160" x2="175" y2="200" stroke="#333" stroke-width="2"/>
+              <line x1="400" y1="160" x2="400" y2="200" stroke="#333" stroke-width="2"/>
+              <line x1="625" y1="160" x2="625" y2="200" stroke="#333" stroke-width="2"/>
+              
+              <line x1="175" y1="250" x2="300" y2="290" stroke="#333" stroke-width="2"/>
+              <line x1="400" y1="250" x2="400" y2="290" stroke="#333" stroke-width="2"/>
+              <line x1="625" y1="250" x2="500" y2="290" stroke="#333" stroke-width="2"/>
+              
+              <line x1="400" y1="360" x2="400" y2="400" stroke="#333" stroke-width="2"/>
+            </svg>
+        </div>
+        
+        <p>Let's break down how self-attention works:</p>
+        
+        <ol>
+            <li><strong>Query, Key, Value Creation</strong>: For each token, we create three vectors:
+                <ul>
+                    <li><strong>Query (Q)</strong>: What the token is looking for</li>
+                    <li><strong>Key (K)</strong>: What the token contains</li>
+                    <li><strong>Value (V)</strong>: The actual information</li>
+                </ul>
+            </li>
+            <li><strong>Attention Calculation</strong>:
+                <ul>
+                    <li>For each Query, we calculate its similarity with every Key</li>
+                    <li>We apply a softmax to get attention weights</li>
+                    <li>We multiply these weights with Values</li>
+                    <li>This gives us a weighted sum representing the token's context-aware representation</li>
+                </ul>
+            </li>
+            <li><strong>Multi-Head Attention</strong>: Instead of performing attention once, transformers do it multiple times in parallel (called "heads"), then combine the results.</li>
+        </ol>
+        
+        <p>The mathematical formula for self-attention is:</p>
+        
+        <blockquote>
+            <code>Attention(Q, K, V) = softmax(QK^T / √d_k)V</code>
+        </blockquote>
+        
+        <h2 id="comparison">Transformers vs. RNNs/CNNs</h2>
+        
+        <div class="diagram-container">
+            <div class="diagram-title">Figure 3: Comparison between Transformers and RNNs/CNNs</div>
+            <img src="https://d2l.ai/_images/cnn-rnn-self-attention.svg" alt="Comparison between Transformers and RNNs/LSTMs" style="width: 100%; height: auto;"/>
+        </div>
+        
+        <p>Transformers offer several advantages over traditional RNNs and LSTMs:</p>
+        
+        <ol>
+            <li><strong>Parallelization</strong>: Transformers can process entire sequences at once, unlike RNNs which must wait for previous steps.</li>
+            <li><strong>Global Context</strong>: Through attention, each position has direct access to every other position.</li>
+            <li><strong>No Vanishing Gradients</strong>: The direct connections between positions eliminate the vanishing gradient problem common in RNNs.</li>
+            <li><strong>Scalability</strong>: Transformers can be scaled to much larger models and datasets.</li>
+        </ol>
+        
+        <h2 id="models">Key Transformer Models</h2>
+        
+        <h3>BERT (Bidirectional Encoder Representations from Transformers)</h3>
+        
+        <p>BERT revolutionized NLP by introducing a pre-training/fine-tuning paradigm. It uses only the encoder part of the transformer and is pre-trained on two tasks:</p>
+        <ul>
+            <li>Masked Language Modeling</li>
+            <li>Next Sentence Prediction</li>
+        </ul>
+        
+        <h3>GPT (Generative Pre-trained Transformer)</h3>
+        
+        <p>GPT models use the decoder part of the transformer and are auto-regressive, meaning they predict the next token based on previous tokens. Each generation has scaled significantly:</p>
+        <ul>
+            <li>GPT-1: 117M parameters</li>
+            <li>GPT-2: 1.5B parameters</li>
+            <li>GPT-3: 175B parameters</li>
+            <li>GPT-4: Estimated to be much larger</li>
+        </ul>
+        
+        <h3>T5 (Text-to-Text Transfer Transformer)</h3>
+        
+        <p>T5 frames all NLP tasks as text-to-text problems, using the full encoder-decoder architecture.</p>
+        
+        <h2 id="applications">Applications Beyond NLP</h2>
+        
+        <p>While transformers were initially designed for language tasks, they've expanded to many other domains:</p>
+        
+        <div class="diagram-container">
+            <div class="diagram-title">Figure 4: Applications of Transformer Architecture</div>
+            <img src="https://blogs.mathworks.com/deep-learning/files/2024/10/transformers_applications.png" alt="Applications of Transformer Architecture" style="width: 100%; height: auto;"/>
+        </div>
+        
+        <h3>Vision Transformers (ViT)</h3>
+        
+        <p>By treating image patches as tokens, Vision Transformers have achieved state-of-the-art results in image classification and other vision tasks.</p>
+        
+        <h3>Audio Transformers</h3>
+        
+        <p>Models like Wav2Vec 2.0 use transformers for audio processing, yielding excellent results in speech recognition.</p>
+        
+        <h3>Multimodal Transformers</h3>
+        
+        <p>CLIP, DALL-E, and similar models combine text and image understanding using transformer architectures.</p>
+        
+        <h2>Scaling Laws and Emergent Abilities</h2>
+        
+        <p>One fascinating aspect of transformers is how they follow predictable scaling laws: as we increase model size, data, and compute, performance improves in a mathematically predictable way.</p>
+        
+        <p>Even more interesting, at certain scales, transformers exhibit "emergent abilities" - capabilities that weren't explicitly trained for but appear once models reach sufficient size.</p>
+        
+        <h2>The Efficiency Challenge</h2>
+        
+        <p>The main drawback of transformers is their quadratic complexity with sequence length. For a sequence of length n, the attention mechanism requires O(n²) operations. This has led to research into more efficient attention mechanisms:</p>
+        
+        <ul>
+            <li><strong>Sparse Attention</strong>: Only attend to a subset of tokens</li>
+            <li><strong>Linear Attention</strong>: Reformulate attention to reduce complexity</li>
+            <li><strong>State Space Models</strong>: Alternative approaches that scale linearly</li>
+        </ul>
+        
+        <h2 id="future">The Future of Transformers</h2>
+        
+        <p>Transformers continue to evolve rapidly. Current research directions include:</p>
+        
+        <ol>
+            <li><strong>More Efficient Architectures</strong>: Models like MQA (Multi-Query Attention) and FlashAttention</li>
+            <li><strong>Longer Context Windows</strong>: Extending beyond the traditional limits</li>
+            <li><strong>Multimodal Integration</strong>: Better combining of text, image, and audio</li>
+            <li><strong>Domain-Specific Optimization</strong>: Specialized transformers for particular tasks</li>
+        </ol>
+        
+        <div class="conclusion">
+            <h2>Conclusion</h2>
+            
+            <p>Transformers have revolutionized artificial intelligence in just a few years. Their ability to process data in parallel, capture long-range dependencies, and scale effectively has made them the backbone of modern AI systems.</p>
+            
+            <p>As research continues to address their limitations and expand their capabilities, transformers will likely remain at the forefront of AI research and applications for years to come.</p>
+        </div>
+        
+        <hr>
+        
+        <p>Whether you're just starting with deep learning or looking to deepen your understanding of these powerful models, I hope this overview has given you a clearer picture of how transformers work and why they've become so important in modern AI.</p>
+        
+       
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 Deep Learning Blog. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://x.com/sakshijadh69013?t=1s5fza5t4dcywuzNeYGuPQ&s=09" class="social-icon">Twitter</a> |
+                <a href="https://www.linkedin.com/in/sakshi-jadhav-7446a62b9/" class="social-icon">LinkedIn</a> |
+                <a href="https://github.com/Jadhavsakshi7887" class="social-icon">GitHub</a>
+            </div>
+            <p>Contact: sakshijadhav788757@gmail.com</p>
+        </div>
+    </footer>
+</body>
+</html>
