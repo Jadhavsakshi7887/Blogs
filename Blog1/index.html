@@ -1,1 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Programming: A Comprehensive Guide</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --code-bg: #f0f0f0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-top: 40px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            margin-top: 30px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        .code-block {
+            background-color: var(--code-bg);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 20px 0;
+            white-space: pre;
+        }
+        
+        .diagram {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre;
+        }
+        
+        .info-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .example {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .note {
+            background-color: rgba(241, 196, 15, 0.1);
+            border-left: 4px solid #f1c40f;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .two-column {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .nav-container {
+            background-color: white;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        
+        nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #777;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            h3 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+        <nav>
+            <a href="#introduction">Introduction</a>
+            <a href="#core-principles">Core Principles</a>
+            <a href="#approaches">Approaches</a>
+            <a href="#visualization">Visualization</a>
+            <a href="#classic-problems">Classic Problems</a>
+            <a href="#strategies">Strategies</a>
+            <a href="#advanced">Advanced DP</a>
+            <a href="#applications">Applications</a>
+        </nav>
+    </div>
 
+    <header>
+        <h1>Dynamic Programming: A Comprehensive Guide</h1>
+        <p>Master the art of solving complex problems through elegant simplification</p>
+    </header>
+
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>Dynamic Programming (DP) is a powerful algorithmic technique used to solve complex problems by breaking them down into simpler subproblems. Unlike divide-and-conquer approaches, DP is particularly effective when subproblems overlap, allowing us to avoid redundant calculations by storing solutions to subproblems in a table.</p>
+            
+            <p>Invented by mathematician Richard Bellman in the 1950s, dynamic programming has become a cornerstone of algorithmic problem-solving, with applications ranging from resource optimization to bioinformatics.</p>
+            
+            <div class="info-box">
+                <p>Fun fact: The term "programming" in "dynamic programming" doesn't refer to computer programming. It was used in the sense of "planning" or "scheduling" - creating a program of decisions to optimize some objective.</p>
+            </div>
+        </section>
+
+        <section id="core-principles">
+            <h2>Core Principles of Dynamic Programming</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>1. Optimal Substructure</h3>
+                    <p>A problem has optimal substructure if an optimal solution can be constructed from optimal solutions of its subproblems. This is a fundamental requirement for applying dynamic programming.</p>
+                    
+                    <div class="example">
+                        <p><strong>Example:</strong> In finding the shortest path from A to B, if the shortest path passes through C, then the portion from A to C must be the shortest path from A to C.</p>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <h3>2. Overlapping Subproblems</h3>
+                    <p>When solving a problem requires solving the same subproblems multiple times, we say the problem has overlapping subproblems. DP gains its efficiency by computing each subproblem only once and storing the results for future use.</p>
+                    
+                    <div class="example">
+                        <p><strong>Example:</strong> In calculating Fibonacci numbers recursively, computing fib(5) requires computing fib(3) twice.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="approaches">
+            <h2>Approaches to Dynamic Programming</h2>
+            
+            <h3>1. Top-Down Approach (Memoization)</h3>
+            <p>The top-down approach starts with the original problem and recursively breaks it down into subproblems. To avoid redundant calculations, we store the results of subproblems in a cache (usually a hash table or array).</p>
+            
+            <div class="code-block">
+# Example: Fibonacci sequence with memoization
+def fibonacci(n, memo={}):
+    if n in memo:
+        return memo[n]
+    if n <= 1:
+        return n
+    memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo)
+    return memo[n]
+            </div>
+            
+            <h3>2. Bottom-Up Approach (Tabulation)</h3>
+            <p>The bottom-up approach starts by solving the smallest subproblems first and builds up to the original problem. This typically involves filling a table (array) with the solutions to subproblems.</p>
+            
+            <div class="code-block">
+# Example: Fibonacci sequence with tabulation
+def fibonacci(n):
+    if n <= 1:
+        return n
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    for i in range(2, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+            </div>
+            
+            <div class="info-box">
+                <p><strong>When to choose which approach?</strong></p>
+                <p><strong>Top-Down (Memoization):</strong> Easier to implement, especially for complex problems. Only computes needed states.</p>
+                <p><strong>Bottom-Up (Tabulation):</strong> Usually more efficient (no recursion overhead). Better space complexity in some cases.</p>
+            </div>
+        </section>
+
+        <section id="visualization">
+            <h2>Visual Representation of Dynamic Programming</h2>
+            
+            <h3>State Transition Diagrams</h3>
+            <p>State transition diagrams visualize how a DP algorithm progresses from one state to another. Here's an example for the Fibonacci sequence:</p>
+            
+            <div class="diagram">
+                   ┌───┐
+                   │ 5 │
+                 ↙️     ↘️
+               ┌───┐   ┌───┐
+               │ 4 │   │ 3 │
+             ↙️     ↘️ ↙️     ↘️
+           ┌───┐   ┌───┐   ┌───┐
+           │ 3 │   │ 2 │   │ 2 │   │ 1 │
+         ↙️     ↘️ ↙️     ↘️ ↙️     ↘️
+       ┌───┐   ┌───┐   ┌───┐   ┌───┐
+       │ 2 │   │ 1 │   │ 1 │   │ 0 │
+     ↙️     ↘️
+   ┌───┐   ┌───┐
+   │ 1 │   │ 0 │
+            </div>
+            
+            <p>In the memoization approach, we would compute each distinct node only once, despite the overlap.</p>
+            
+            <h3>DP Table Visualization</h3>
+            <p>For the bottom-up approach, we can visualize how the table gets filled:</p>
+            
+            <div class="diagram">
+Fibonacci DP Table (n=5):
+Index:   0  1  2  3  4  5
+Value:   0  1  1  2  3  5
+           ↑  ↑  ↑  ↑  ↑
+              └─┼──┘  │
+                └─────┘
+            </div>
+        </section>
+
+        <section id="classic-problems">
+            <h2>Classic Dynamic Programming Problems</h2>
+            
+            <h3>1. The Knapsack Problem</h3>
+            <p>Problem: Given a set of items, each with a weight and a value, determine which items to include in a collection so that the total weight is less than or equal to a given limit and the total value is as large as possible.</p>
+            
+            <h4>DP Table Visualization</h4>
+            <p>Let's visualize a simple example with 3 items:</p>
+            <ul>
+                <li>Item 1: Value=60, Weight=10</li>
+                <li>Item 2: Value=100, Weight=20</li>
+                <li>Item 3: Value=120, Weight=30</li>
+            </ul>
+            <p>With maximum weight capacity of 50:</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th colspan="6">Weight Capacity</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>0</th>
+                            <th>10</th>
+                            <th>20</th>
+                            <th>30</th>
+                            <th>40</th>
+                            <th>50</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>No item</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Item 1 (60,10)</td>
+                            <td>0</td>
+                            <td>60</td>
+                            <td>60</td>
+                            <td>60</td>
+                            <td>60</td>
+                            <td>60</td>
+                        </tr>
+                        <tr>
+                            <td>Item 2 (100,20)</td>
+                            <td>0</td>
+                            <td>60</td>
+                            <td>100</td>
+                            <td>160</td>
+                            <td>160</td>
+                            <td>160</td>
+                        </tr>
+                        <tr>
+                            <td>Item 3 (120,30)</td>
+                            <td>0</td>
+                            <td>60</td>
+                            <td>100</td>
+                            <td>160</td>
+                            <td>180</td>
+                            <td>220</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="code-block">
+def knapsack(values, weights, capacity):
+    n = len(values)
+    dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
+    
+    for i in range(1, n + 1):
+        for w in range(capacity + 1):
+            if weights[i-1] <= w:
+                dp[i][w] = max(values[i-1] + dp[i-1][w-weights[i-1]], dp[i-1][w])
+            else:
+                dp[i][w] = dp[i-1][w]
+                
+    return dp[n][capacity]
+            </div>
+            
+            <h3>2. Longest Common Subsequence (LCS)</h3>
+            <p>Problem: Find the longest subsequence that is common to two sequences.</p>
+            
+            <h4>DP Table Visualization</h4>
+            <p>Example with sequences "ABCBDAB" and "BDCABA":</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>B</th>
+                            <th>D</th>
+                            <th>C</th>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>A</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>C</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>D</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+                        <tr>
+                            <td>A</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>B</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p>The LCS is "BCBA" with length 4.</p>
+            
+            <h3>3. Coin Change Problem</h3>
+            <p>Problem: Given a set of coin denominations and a target amount, find the minimum number of coins needed to make that amount.</p>
+            
+            <h4>State Transition Diagram (Partial)</h4>
+            <p>For denominations [1,2,5] and amount 7:</p>
+            
+            <div class="diagram">
+                    ┌───┐
+                    │ 7 │
+           ┌────────┴───┴────────┐
+           ▼                      ▼
+         ┌───┐                  ┌───┐
+         │ 6 │                  │ 2 │
+   ┌─────┴───┴─────┐            └───┘
+   ▼               ▼
+ ┌───┐           ┌───┐
+ │ 5 │           │ 4 │
+ └───┘     ┌─────┴───┴─────┐
+           ▼               ▼
+         ┌───┐           ┌───┐
+         │ 3 │           │ 2 │
+   ┌─────┴───┴─────┐     └───┘
+   ▼               ▼
+ ┌───┐           ┌───┐
+ │ 2 │           │ 1 │
+ └───┘           └───┘
+            </div>
+            
+            <div class="code-block">
+def min_coins(coins, amount):
+    dp = [float('inf')] * (amount + 1)
+    dp[0] = 0
+    
+    for coin in coins:
+        for x in range(coin, amount + 1):
+            dp[x] = min(dp[x], dp[x - coin] + 1)
+            
+    return dp[amount] if dp[amount] != float('inf') else -1
+            </div>
+        </section>
+
+        <section id="strategies">
+            <h2>Implementation Strategies</h2>
+            
+            <h3>Time-Space Tradeoffs</h3>
+            <p>Dynamic programming often trades space complexity for time efficiency. By storing solutions to subproblems, we reduce time complexity but increase space usage.</p>
+            
+            <p>For example, in the Fibonacci sequence:</p>
+            <ul>
+                <li>Naive recursive: O(2^n) time, O(n) space</li>
+                <li>DP with memoization: O(n) time, O(n) space</li>
+                <li>DP with tabulation: O(n) time, O(n) space</li>
+                <li>Optimized tabulation: O(n) time, O(1) space (if we only keep the last two values)</li>
+            </ul>
+            
+            <h3>Optimization Techniques</h3>
+            <ol>
+                <li><strong>Space Optimization:</strong> Many DP problems can use rolling arrays to reduce space complexity.</li>
+                <li><strong>State Compression:</strong> For problems with binary states, bit manipulation can reduce space usage.</li>
+                <li><strong>Preprocessing:</strong> Some inputs can be preprocessed to simplify the DP calculation.</li>
+            </ol>
+            
+            <div class="example">
+                <p><strong>Example of Space Optimization:</strong> Instead of keeping the entire Fibonacci DP table, we can just track the last two values:</p>
+                <div class="code-block">
+def fibonacci_optimized(n):
+    if n <= 1:
+        return n
+    a, b = 0, 1
+    for i in range(2, n + 1):
+        a, b = b, a + b
+    return b
+                </div>
+            </div>
+        </section>
+
+        <section id="advanced">
+            <h2>Advanced Dynamic Programming</h2>
+            
+            <h3>Multi-dimensional DP</h3>
+            <p>Many real-world problems require multi-dimensional DP tables:</p>
+            
+            <div class="diagram">
+3D DP Example (partial visualization):
+                 k
+               ┌─────┐
+              /│     │
+             / │     │
+            /  │     │
+           /   │     │
+          /    │     │
+j        /     │     │
+┌───────┐      │     │
+│       │      │     │
+│       │      │     │
+│       │      │     │
+└───────┘      └─────┘
+        \      /
+         \    /
+          \  /
+           \/
+           i
+            </div>
+            
+            <h3>DP with Binary Search</h3>
+            <p>Some problems can be solved more efficiently by combining DP with binary search, such as the Longest Increasing Subsequence problem when implemented optimally.</p>
+            
+            <div class="code-block">
+def longest_increasing_subsequence(nums):
+    if not nums:
+        return 0
+        
+    # This will hold the values of the subsequence
+    tails = [0] * len(nums)
+    size = 0
+    
+    for num in nums:
+        # Binary search
+        left, right = 0, size
+        while left != right:
+            mid = (left + right) // 2
+            if tails[mid] < num:
+                left = mid + 1
+            else:
+                right = mid
+        
+        tails[left] = num
+        size = max(left + 1, size)
+    
+    return size
+            </div>
+            
+            <div class="note">
+                <p>This approach reduces the time complexity from O(n²) to O(n log n) by using binary search to find the correct position for each element in the subsequence.</p>
+            </div>
+        </section>
+
+        <section id="applications">
+            <h2>Real-World Applications</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <h3>1. Resource Allocation</h3>
+                    <p>Optimizing the distribution of resources under constraints (similar to the knapsack problem). Used in project scheduling, budget allocation, and manufacturing planning.</p>
+                    
+                    <h3>2. Bioinformatics</h3>
+                    <p>DNA sequence alignment, protein folding prediction, and genome sequencing all make heavy use of dynamic programming algorithms.</p>
+                    
+                    <h3>3. Finance</h3>
+                    <p>Portfolio optimization, option pricing (Black-Scholes model), and risk management strategies often employ dynamic programming.</p>
+                </div>
+                
+                <div class="column">
+                    <h3>4. Natural Language Processing</h3>
+                    <p>Speech recognition, machine translation, and parsing algorithms frequently rely on dynamic programming approaches.</p>
+                    
+                    <h3>5. Computer Graphics</h3>
+                    <p>Seam carving for content-aware image resizing is a creative application of dynamic programming.</p>
+                    
+                    <div class="info-box">
+                        <p><strong>Hidden Markov Models (HMMs)</strong>, which are widely used in speech recognition and bioinformatics, can be solved efficiently using the Viterbi algorithm - a dynamic programming approach.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="conclusion">
+            <h2>Conclusion</h2>
+            <p>Dynamic programming is a powerful technique that transforms exponential-time problems into polynomial-time solutions. By identifying optimal substructure and overlapping subproblems, you can develop efficient algorithms for many complex problems.</p>
+            
+            <p>The key to mastering dynamic programming is practice. Start with simple problems like Fibonacci and gradually work your way up to more complex challenges. With time, you'll develop an intuition for recognizing problems that can be solved with dynamic programming.</p>
+            
+            <div class="note">
+                <p><strong>Remember:</strong> When faced with a new problem, ask yourself these questions:</p>
+                <ol>
+                    <li>Can the problem be broken down into smaller subproblems?</li>
+                    <li>Are there overlapping subproblems?</li>
+                    <li>What is the recurrence relation between subproblems?</li>
+                    <li>What is the base case?</li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Dynamic Programming Guide</p>
+        <p>References:</p>
+        <p>Bellman, R. (1957). Dynamic Programming. Princeton University Press.<br>
+        Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to Algorithms (3rd ed.). MIT Press.<br>
+        Sedgewick, R., & Wayne, K. (2011). Algorithms (4th ed.). Addison-Wesley Professional.</p>
+    </footer>
+</body>
+</html>
